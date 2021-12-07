@@ -1,0 +1,19 @@
+%display-flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.edit-container {
+  @extend %display-flex-column;
+  width: 15%;
+  margin: 33px;
+
+  form {
+    margin-bottom: 10px;
+
+    div {
+      @extend %display-flex-column;
+      margin-bottom: 10px;
+    }
+  }
+}

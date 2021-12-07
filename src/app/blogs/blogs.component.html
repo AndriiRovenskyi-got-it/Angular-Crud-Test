@@ -1,0 +1,30 @@
+<div class="container">
+  <h1>Blogs</h1>
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Content</th>
+      <th colspan="3"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of blogs$ | async" class="displayItems">
+      <td>{{item.title}}</td>
+      <td>{{item.content}}</td>
+      <td>
+        <a (click)="onNavigate('show', item.id)">Show</a>
+      </td>
+      <td>
+        <a (click)="onNavigate('edit', item.id)">Edit</a>
+      </td>
+      <td>
+        <a (click)="onDelete(item.id)">Destroy</a>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+  <div style="margin: 10px;">
+    <a (click)="onNavigate('create', 0)">New Blog</a>
+  </div>
+</div>

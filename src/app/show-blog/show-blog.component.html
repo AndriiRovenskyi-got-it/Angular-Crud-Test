@@ -1,0 +1,9 @@
+<div class="container" *ngIf="blog$ | async as blog">
+  <p><b>Title: </b>{{blog.title}}</p>
+  <p><b>Content: </b>{{blog.content}}</p>
+  <nav>
+    <a (click)="onNavigate('edit', blog.id)">Edit</a>
+    <span>| </span>
+    <a (click)="onNavigate('back', blog.id)">Back</a>
+  </nav>
+</div>
