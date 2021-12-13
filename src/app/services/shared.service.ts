@@ -1,18 +1,26 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject} from "rxjs";
+import {filter, map, Observable, Subject} from "rxjs";
+import {BroadcastEvent} from "../interfaces/broadcast.event";
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class SharedService {
-  subject = new BehaviorSubject([]);
 
-  on(value: any) {
-    this.subject.next(value);
+  _eventBus: Subject<BroadcastEvent> = new Subject<BroadcastEvent>();
+
+  constructor() {
   }
 
-  broadcast(): any {
-    return this.subject.asObservable();
+  broadcast(key: any, data?: any) {
+    this._eventBus.next({key, data});
+  }
+
+  on(key: any): Observable<any> {
+    return this._eventBus.asObservable().pipe(
+      filter(event => event.key === key),
+      map(event => event.data)
+    )
   }
 }

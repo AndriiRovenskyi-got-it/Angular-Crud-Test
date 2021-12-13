@@ -19,10 +19,14 @@ export class BlogsComponent implements OnInit, OnDestroy {
     this.blogsService.getItems()
       .pipe(takeUntil(this.destroy$))
       .subscribe(blogs => {
-        // TODO: emit new changes
-        this.sharedService.on(blogs);
-        // TODO: subscribe for changes
-        this.blogs$ = this.sharedService.broadcast();
+        // TODO: on
+        this.sharedService.on('sharedBlogs')
+          .pipe(takeUntil(this.destroy$))
+          .subscribe(message => {
+            this.blogs$ = message;
+          });
+        // TODO: broadcast
+        this.sharedService.broadcast('sharedBlogs', blogs);
       })
   }
 

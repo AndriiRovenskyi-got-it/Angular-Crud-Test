@@ -9,7 +9,7 @@
     </tr>
     </thead>
     <tbody>
-    <tr *ngFor="let item of blogs$ | async" class="displayItems">
+    <tr *ngFor="let item of blogs$" class="displayItems">
       <td>{{item.title}}</td>
       <td>{{item.content}}</td>
       <td>
